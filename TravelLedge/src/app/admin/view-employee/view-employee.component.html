@@ -3,7 +3,7 @@
 
   <ul *ngIf="empleados.length > 0; else sinEmpleados">
     <li *ngFor="let empleado of empleados">
-      <strong>{{ empleado.nombreUsuario }}</strong> ({{ empleado.role }})
+      <strong>{{ empleado.nombreUser }}</strong>
     </li>
   </ul>
 

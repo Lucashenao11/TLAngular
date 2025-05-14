@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   private apiUrl1 = 'http://localhost:3000/auth';
-  private apiUrl2 = 'http://localhost:3000/api/users';
+  private apiUrl2 = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) {}
 
@@ -23,6 +23,10 @@ export class AuthService {
 
   getUsers(token: string): Observable<any> {
   const headers = { 'Authorization': `Bearer ${token}` }; 
-  return this.http.get(`${this.apiUrl2}/getUsers`, { headers });
+  return this.http.get(`${this.apiUrl2}/users/getUsers`, { headers });
 }
+
+  getLogs(): Observable<any> {
+    return this.http.get(`${this.apiUrl2}/logs`);
+  }
 }

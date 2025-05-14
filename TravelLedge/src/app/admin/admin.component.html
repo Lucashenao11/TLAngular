@@ -1,9 +1,8 @@
 <div class="admin-container">
   <header class="admin-header">
-  <h2>Panel de Administración</h2>
-  <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
-</header>
-
+    <h2>Panel de Administración</h2>
+    <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+  </header>
 
   <nav class="admin-nav">
     <ul>
@@ -15,13 +14,16 @@
   <section class="dashboard">
     <div class="overview-card">
       <h3>Resumen de Empleados</h3>
-      <p>Total de empleados: <span class="highlight">12</span></p>
+      <p>Total de empleados: <span class="highlight">{{ empleadosCount }}</span></p>
     </div>
+
     <div class="overview-card">
       <h3>Acciones recientes</h3>
       <ul>
-        <li>Empleado "Juan Pérez" agregado.</li>
-        <li>Empleado "Ana Gómez" eliminado.</li>
+        <li *ngFor="let log of recentLogs">
+          <span>{{ log.descripcion }}</span>
+          <small>({{ log.createdAt | date:'short' }})</small>
+        </li>
       </ul>
     </div>
   </section>
