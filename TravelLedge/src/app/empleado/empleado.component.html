@@ -1,0 +1,12 @@
+<div class="empleado-container">
+  <header class="empleado-header">
+  <h2>Panel del Empleado</h2>
+  <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+</header>  <p class="description">Registra tus gastos de viaje fácilmente:</p>
+
+  <div class="button-group">
+    <button (click)="onAddGasto('alimentacion')">🍽️ Alimentación</button>
+    <button (click)="onAddGasto('transporte')">🚌 Transporte</button>
+    <button (click)="onAddGasto('estadia')">🏨 Estadía</button>
+  </div>
+</div>

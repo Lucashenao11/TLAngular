@@ -1,0 +1,17 @@
+<div class="registro-container">
+  <h2>Registro de Administrador</h2>
+
+  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="registro-form">
+    <div class="input-group">
+      <label for="nombreUsuario">Usuario</label>
+      <input id="nombreUsuario" formControlName="nombreUsuario" type="text" required />
+    </div>
+
+    <div class="input-group">
+      <label for="password">Contraseña</label>
+      <input id="password" formControlName="password" type="password" required />
+    </div>
+
+    <button type="submit" [disabled]="registroForm.invalid">Registrar</button>
+  </form>
+</div>

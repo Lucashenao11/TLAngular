@@ -1,0 +1,31 @@
+<div class="add-employee-container">
+  <h2>Agregar Nuevo Empleado</h2>
+
+  <form [formGroup]="addEmployeeForm" (ngSubmit)="onSubmit()" class="employee-form">
+    <div class="form-group">
+      <label for="nombreUsuario">Nombre de Usuario</label>
+      <input
+        id="nombreUsuario"
+        type="text"
+        formControlName="nombreUsuario"
+        placeholder="Ingresa el nombre de usuario"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        placeholder="Ingresa la contraseña"
+        required
+      />
+    </div>
+
+    <button type="submit" [disabled]="addEmployeeForm.invalid">
+      Crear Empleado
+    </button>
+  </form>
+</div>

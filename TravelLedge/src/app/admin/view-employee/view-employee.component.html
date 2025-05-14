@@ -1,0 +1,13 @@
+<div class="employee-list">
+  <h2>Empleados Registrados</h2>
+
+  <ul *ngIf="empleados.length > 0; else sinEmpleados">
+    <li *ngFor="let empleado of empleados">
+      <strong>{{ empleado.nombreUsuario }}</strong> ({{ empleado.role }})
+    </li>
+  </ul>
+
+  <ng-template #sinEmpleados>
+    <p>No hay empleados registrados.</p>
+  </ng-template>
+</div>
