@@ -54,3 +54,21 @@ button:disabled {
 button:hover:not(:disabled) {
   background-color: #219150;
 }
+
+.login-prompt {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.login-prompt a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.login-prompt a:hover {
+  text-decoration: underline;
+}

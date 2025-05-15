@@ -1,24 +1,30 @@
 <div class="admin-container">
   <header class="admin-header">
-    <h2>Panel de Administración</h2>
-    <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+    <h2><i class="icon-dashboard"></i> Panel de Administración</h2>
+
+    <Trv-settings 
+      (cerrarSesionEvent)="logout()" 
+      (eliminarCuentaEvent)="eliminarCuenta()"
+      class="settings-component"
+    ></Trv-settings>
   </header>
 
   <nav class="admin-nav">
     <ul>
-      <li><a routerLink="add-employee">Agregar Empleado</a></li>
-      <li><a routerLink="view-employee">Ver Empleados</a></li>
+      <li><a routerLink="add-employee"><i class="icon-user-plus"></i> Agregar Empleado</a></li>
+      <li><a routerLink="view-employee"><i class="icon-users"></i> Ver Empleados</a></li>
+      <li><a routerLink="manage-employee"><i class="icon-user-plus"></i> Gestionar Empleado</a></li>
     </ul>
   </nav>
 
   <section class="dashboard">
     <div class="overview-card">
-      <h3>Resumen de Empleados</h3>
+      <h3><i class="icon-bar-chart"></i> Resumen de Empleados</h3>
       <p>Total de empleados: <span class="highlight">{{ empleadosCount }}</span></p>
     </div>
 
     <div class="overview-card">
-      <h3>Acciones recientes</h3>
+      <h3><i class="icon-clock"></i> Acciones recientes</h3>
       <ul>
         <li *ngFor="let log of recentLogs">
           <span>{{ log.descripcion }}</span>

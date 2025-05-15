@@ -15,6 +15,10 @@ import { RegistroComponent } from './registro/registro.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddEmployeeComponent } from './admin/add-employee/add-employee.component';
 import { ViewEmployeeComponent } from './admin/view-employee/view-employee.component';
+import { ManageEmployeeComponent } from './admin/manage-employee/manage-employee.component';
+import { DeleteEmployeeComponent } from './admin/manage-employee/delete-employee/delete-employee.component';
+import { UpdateEmployeeComponent } from './admin/manage-employee/update-employee/update-employee.component';
+import { SettingsComponent } from './admin/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +30,10 @@ import { ViewEmployeeComponent } from './admin/view-employee/view-employee.compo
     RegistroComponent,
     AddEmployeeComponent,
     ViewEmployeeComponent,
+    ManageEmployeeComponent,
+    DeleteEmployeeComponent,
+    UpdateEmployeeComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

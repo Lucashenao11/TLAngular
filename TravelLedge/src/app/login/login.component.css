@@ -62,3 +62,21 @@ button:disabled {
 button:hover:not(:disabled) {
   background-color: #0056b3;
 }
+
+.register-prompt {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.register-prompt a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.register-prompt a:hover {
+  text-decoration: underline;
+}

@@ -29,4 +29,22 @@ export class AuthService {
   getLogs(): Observable<any> {
     return this.http.get(`${this.apiUrl2}/logs`);
   }
+
+  deleteUser(id: string, token: string): Observable<any> {
+    const headers = { 'Authorization': `Bearer ${token}` };
+    return this.http.delete(`${this.apiUrl2}/users/deleteUser/${id}`, { headers });
+  }
+
+
+  getUserByUsername(nombreUsuario: string, token: string): Observable<any> {
+    const headers = { 'Authorization': `Bearer ${token}` };
+    return this.http.get(`${this.apiUrl2}/users/getUserByUsername/${nombreUsuario}`, { headers });
+  }
+
+  updateUser(id: number, nombreUsuario: string, password: string, token: string): Observable<any> {
+    const headers = { 'Authorization': `Bearer ${token}` };
+    return this.http.post(`${this.apiUrl2}/users/updateUser/${id}`, { nombreUsuario, password }, { headers });
+  }
+
+
 }

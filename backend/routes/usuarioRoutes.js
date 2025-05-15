@@ -5,8 +5,8 @@ const authService = require("../services/authService");
 
 // Rutas de usuario
 router.get("/getUsers", authService, usuarioController.getUsers);
-router.post("/:id", authService, usuarioController.updateUser);
-router.post("/ChangeStatus/:id", authService, usuarioController.changeUserStatus);
-router.get("/:id", authService, usuarioController.getUserById);
+router.delete("/deleteUser/:id", authService, usuarioController.deleteUser);
+router.post("/updateUser/:id", authService, usuarioController.updateUser);
+router.get("/getUserByUsername/:nombreUsuario", authService, usuarioController.getUserByUsername);
 
 module.exports = router;

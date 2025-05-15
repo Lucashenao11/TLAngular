@@ -1,95 +1,191 @@
-/* Estructura base */
 .admin-container {
-  font-family: 'Roboto', sans-serif;
-  margin: 20px;
-  padding: 20px;
-  background-color: #f4f6f9;
-  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  padding: 2rem;
+  background: #f0f2f5;
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
 }
 
-header {
+.admin-header {
+  position: relative; /* para que settings se posicione relativo */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
+  padding-right: 4rem; /* espacio para settings */
 }
 
-header h2 {
-  font-size: 24px;
-  color: #333;
-}
-
-.header-actions .btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
+.admin-header h2 {
+  font-size: 2rem;
+  color: #2c3e50;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
+  user-select: none;
 }
 
-.header-actions .btn:hover {
-  background-color: #0056b3;
+.logout-btn {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 3px 6px rgba(255, 107, 107, 0.5);
 }
 
+.logout-btn:hover {
+  background-color: #e74c3c;
+  transform: scale(1.05);
+  box-shadow: 0 5px 12px rgba(231, 76, 60, 0.7);
+}
+
+/* Settings button (tuerca) */
+.settings-component {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 20;
+  user-select: none;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  background: #fff;
+  padding: 0.5rem;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-component:hover {
+  filter: brightness(0.85);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.settings-component svg,
+.settings-component i {
+  font-size: 1.6rem;
+  color: #34495e;
+  pointer-events: none;
+}
+
+/* Dropdown menú de settings */
+.settings-dropdown {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  background-color: white;
+  border-radius: 0.8rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  overflow: hidden;
+  animation: fadeInScale 0.25s ease forwards;
+  z-index: 25;
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.settings-dropdown button {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  background: none;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #34495e;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #eee;
+}
+
+.settings-dropdown button:last-child {
+  border-bottom: none;
+}
+
+.settings-dropdown button:hover {
+  background-color: #f0f2f5;
+  color: #007bff;
+}
+
+/* Navegación */
 .admin-nav {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  margin-bottom: 2rem;
 }
 
 .admin-nav ul {
-  list-style: none;
-  padding: 10px;
+  display: flex;
+  gap: 1.5rem;
+  padding: 0;
   margin: 0;
-}
-
-.admin-nav ul li {
-  display: inline-block;
-  margin-right: 20px;
+  list-style: none;
 }
 
 .admin-nav ul li a {
   text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  padding: 10px;
-  transition: background-color 0.3s;
+  color: #34495e;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.3s ease;
 }
 
 .admin-nav ul li a:hover {
-  background-color: #007bff;
-  color: white;
-  border-radius: 5px;
+  color: #007bff;
+  transform: scale(1.05);
 }
 
 .dashboard {
   display: flex;
-  gap: 20px;
-  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .overview-card {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  width: 48%;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  flex: 1 1 45%;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.overview-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
 .overview-card h3 {
-  color: #333;
-  font-size: 20px;
-  margin-bottom: 15px;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .overview-card p {
-  font-size: 16px;
+  font-size: 1.1rem;
   color: #555;
 }
 
@@ -99,42 +195,27 @@ header h2 {
 }
 
 .overview-card ul {
-  padding-left: 20px;
+  padding-left: 1rem;
 }
 
 .overview-card ul li {
-  font-size: 14px;
+  font-size: 0.95rem;
   color: #666;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
-/* Adaptación responsiva */
+/* Responsive */
 @media (max-width: 768px) {
   .dashboard {
     flex-direction: column;
   }
 
   .overview-card {
-    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .admin-nav ul {
+    flex-direction: column;
+    gap: 1rem;
   }
 }
-
-.admin-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logout-btn {
-  padding: 6px 12px;
-  background-color: #e74c3c;
-  border: none;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.logout-btn:hover {
-  background-color: #c0392b;
-}
-

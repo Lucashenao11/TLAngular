@@ -1,0 +1,10 @@
+<div class="settings-container" [class.open]="menuVisible">
+  <button (click)="toggleMenu()" aria-label="Ajustes" class="settings-button" title="Ajustes">
+    ⚙️
+  </button>
+
+  <div *ngIf="menuVisible" class="settings-menu" (click)="$event.stopPropagation()">
+    <button (click)="cerrarSesion()">Cerrar sesión</button>
+    <button (click)="eliminarCuenta()" class="danger">Eliminar cuenta</button>
+  </div>
+</div>

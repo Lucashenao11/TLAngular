@@ -1,0 +1,84 @@
+/* Contenedor general centrado */
+div {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título */
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Formulario ocupa todo el ancho del contenedor */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Etiquetas */
+label {
+  align-self: flex-start;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #555;
+  width: 100%;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #3f51b5;
+  box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.1);
+}
+
+/* Botón */
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #3f51b5;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #303f9f;
+}
+
+/* Mensaje de error */
+.error {
+  margin-top: 16px;
+  padding: 10px;
+  background-color: #ffebee;
+  color: #c62828;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+}

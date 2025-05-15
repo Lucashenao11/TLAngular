@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      nombreUser: { // Este es el nombre del campo, asegúrate de usarlo correctamente
+      nombreUser: {
         type: DataTypes.STRING(50),
         allowNull: false,
         unique: true,

@@ -60,8 +60,16 @@ export class AdminComponent {
     this.router.navigate(['view-employee'], { relativeTo: this.route });
   }
 
+  onManageEmployee(): void {
+    this.router.navigate(['manage-employee'], {relativeTo: this.route});
+  }
+
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
+
+  eliminarCuenta() {
+throw new Error('Method not implemented.');
+}
 }

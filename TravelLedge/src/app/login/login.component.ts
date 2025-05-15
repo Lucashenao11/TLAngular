@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', res.token);
 
         const decodedToken = this.decodeToken(res.token);  // Usa una función para decodificar el token
+        localStorage.setItem('id', decodedToken.id);  // 👈 Agrega esta línea
 
         // Redireccionar basado en el rol
         if (decodedToken.role === 'admin') {

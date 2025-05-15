@@ -8,6 +8,10 @@ import { RegistroComponent } from './registro/registro.component';
 import { AddEmployeeComponent } from './admin/add-employee/add-employee.component';
 import { ViewEmployeeComponent } from './admin/view-employee/view-employee.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ManageEmployeeComponent } from './admin/manage-employee/manage-employee.component';
+import { DeleteEmployeeComponent } from './admin/manage-employee/delete-employee/delete-employee.component';
+import { UpdateEmployeeComponent } from './admin/manage-employee/update-employee/update-employee.component';
+import { SettingsComponent } from './admin/settings/settings.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,7 +22,14 @@ const routes: Routes = [
     data: { expectedRole: 'admin' },
     children: [
       { path: 'add-employee', component: AddEmployeeComponent },
-      { path: 'view-employee', component: ViewEmployeeComponent }
+      { path: 'manage-employee', 
+        component: ManageEmployeeComponent,
+      children: [
+        {path: 'delete-employee', component: DeleteEmployeeComponent },
+        {path: 'update-employee', component: UpdateEmployeeComponent }
+      ]},
+      { path: 'view-employee', component: ViewEmployeeComponent },
+      { path: 'settings', component: SettingsComponent }
     ] },
   { path: 'empleado',
     component: EmpleadoComponent,
