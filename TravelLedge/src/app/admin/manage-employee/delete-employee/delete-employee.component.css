@@ -1,0 +1,25 @@
+.eliminar-box {
+  border: 1px solid #f44336;
+  padding: 16px;
+  border-radius: 8px;
+  margin-left: 16px;
+  background-color: #fff0f0;
+}
+
+button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #d32f2f;
+}
+
+.error-message {
+  color: red;
+  margin-top: 8px;
+}

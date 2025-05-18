@@ -1,0 +1,16 @@
+<div *ngIf="empleado">
+  <h2>Actualizar Empleado</h2>
+  <form (ngSubmit)="actualizar()">
+    <label for="nombre">Nuevo Nombre:</label>
+    <input [(ngModel)]="nuevoNombre" name="nombre" id="nombre" required />
+
+    <label for="password">Nueva Contraseña:</label>
+    <input [(ngModel)]="nuevoPassword" name="password" id="password" type="password" required />
+
+    <button type="submit">Actualizar</button>
+  </form>
+  
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+</div>

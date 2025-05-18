@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'Trv-login',
@@ -25,35 +26,56 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-  if (this.loginForm.valid) {
-    const { nombreUsuario, password } = this.loginForm.value;
+    if (this.loginForm.valid) {
+      const { nombreUsuario, password } = this.loginForm.value;
 
-    this.authService.login(nombreUsuario, password).subscribe({
-      next: (res) => {
-        localStorage.setItem('token', res.token);
+      this.authService.login(nombreUsuario, password).subscribe({
+        next: (res) => {
+          const user = JSON.parse(localStorage.getItem('user') || '{}');
+          const role = user.role;
 
-        const decodedToken = this.decodeToken(res.token);  // Usa una función para decodificar el token
+          console.log('User from localStorage:', user);
 
-        // Redireccionar basado en el rol
-        if (decodedToken.role === 'admin') {
-          this.router.navigate(['/admin']);
-        } else if (decodedToken.role === 'empleado') {
-          this.router.navigate(['/empleado']);
-        } else {
-          this.router.navigate(['/']);  // Si el rol no es reconocido, redirige a Home
+          if (role === 'admin') {
+            this.router.navigate(['/admin']);
+          } else if (role === 'empleado') {
+            this.router.navigate(['/empleado']);
+          } else {
+            this.router.navigate(['/']);
+            Swal.fire({
+              title: 'Error',
+              text: 'Rol no reconocido.',
+              icon: 'error',
+              customClass: {
+                confirmButton: 'swal2-confirm btn btn-danger'
+              },
+              buttonsStyling: false
+            });
+          }
+        },
+        error: (err) => {
+          console.error('Error al iniciar sesión:', err);
+          Swal.fire({
+            title: 'Error',
+            text: err.message || 'Credenciales inválidas o error del servidor.',
+            icon: 'error',
+            customClass: {
+              confirmButton: 'swal2-confirm btn btn-danger'
+            },
+            buttonsStyling: false
+          });
         }
-      },
-      error: (err) => {
-        console.error('Error al iniciar sesión:', err);  // Mostrar el error en la consola
-        alert(`Error: ${err.error?.error || 'Credenciales inválidas o error del servidor'}`);
-      }
-    });
-  }
-}
-
-// Función para decodificar el token
-decodeToken(token: string) {
-  const payload = token.split('.')[1]; // Obtenemos la parte del payload
-  return JSON.parse(atob(payload));  // Decodificamos el payload y lo retornamos
+      });
+    } else {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor, completa todos los campos.',
+        icon: 'warning',
+        customClass: {
+          confirmButton: 'swal2-confirm btn btn-danger'
+        },
+        buttonsStyling: false
+      });
+    }
   }
 }

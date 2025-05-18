@@ -1,5 +1,5 @@
 // authController.js
-const { User } = require("../models"); // Asegúrate de que models/index.js exporta User
+const { User, Log } = require("../models");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -57,6 +57,12 @@ const register = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
+
+    if (nuevoUsuario.role === 'empleado') {
+      await Log.create({ descripcion: `Empleado "${nuevoUsuario.nombreUser}" agregado.` });
+    }
+
+
 
     res.status(201).json({ message: "Usuario registrado correctamente", token });
   } catch (error) {

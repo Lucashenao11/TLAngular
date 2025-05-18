@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'Trv-registro',
@@ -33,14 +34,25 @@ constructor(
     this.authService.register(nombreUsuario, password, role).subscribe({
       next: (res) => {
         localStorage.setItem('token', res.token);
-
-          this.router.navigate(['/']);
+        Swal.fire({
+          icon: 'success',
+          title: '¡Registro exitoso!',
+          text: 'Usuario registrado correctamente.',
+          showConfirmButton: true,
+          confirmButtonText: 'Ir al login',
+        }).then(() => {
+          this.router.navigate(['/login']);
+        });
       },
       error: (err) => {
-        console.error('Error al registrarse:', err);  // Mostrar el error en la consola
-        alert(`Error: ${err.error?.error || 'Credenciales inválidas o error del servidor'}`);
-      }
-    });
+        console.error('Error al registrarse:', err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: err.error?.error || 'Credenciales inválidas o error del servidor',
+          });
+        }
+      });
     }
   }
 }

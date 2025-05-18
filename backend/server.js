@@ -10,6 +10,7 @@ dotenv.config();
 // Importar rutas
 const authRoutes = require('./routes/authRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
+const logRoutes = require('./routes/logRoutes');
 
 app.use(cors()); // Permite que el frontend se conecte al backend
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use(express.json());
 // Rutas de autenticación
 app.use('/auth', authRoutes);
 app.use('/api/users', usuarioRoutes);
+app.use('/api', logRoutes);
 
 // Conectar a la base de datos
 const db = mysql.createConnection({

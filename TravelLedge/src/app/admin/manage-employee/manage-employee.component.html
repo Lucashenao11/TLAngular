@@ -1,0 +1,34 @@
+<div>
+  <input [(ngModel)]="nombreBuscado" placeholder="Nombre de usuario" />
+  <button (click)="buscarEmpleado()">Buscar</button>
+</div>
+
+<div *ngIf="empleadoSeleccionado" class="empleado-card">
+  <h3>Empleado Encontrado</h3>
+  <p><strong>ID:</strong> {{ empleadoSeleccionado.id }}</p>
+  <p><strong>Nombre:</strong> {{ empleadoSeleccionado.nombreUser }}</p>
+
+  <div class="acciones-container">
+<!-- Mostrar el botón solo si hay un empleado encontrado -->
+<div *ngIf="empleadoSeleccionado">
+  <button (click)="mostrarFormulario = !mostrarFormulario">
+    {{ mostrarFormulario ? 'Cancelar' : 'Actualizar empleado' }}
+  </button>
+
+  <Trv-update-employee
+    *ngIf="mostrarFormulario"
+    [empleado]="empleadoSeleccionado"
+    (onUpdated)="manejarActualizacion($event)">
+  </Trv-update-employee>
+</div>
+
+    <Trv-delete-employee
+      [empleado]="empleadoSeleccionado"
+      (eliminado)="empleadoSeleccionado = null"
+    ></Trv-delete-employee>
+  </div>
+</div>
+
+<div *ngIf="error" class="error-message">
+  {{ error }}
+</div>
