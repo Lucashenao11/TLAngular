@@ -50,8 +50,11 @@ manejarActualizacion(actualizado: any) {
   this.authService.getUserByUsername(this.nombreBuscado.trim(), token).subscribe({
     next: (user) => {
       if (user) {
-        this.empleadoSeleccionado = user;
-      } else {
+        if (user.role === 'empleado') {
+            this.empleadoSeleccionado = user;
+          } else {
+          this.error = 'Empleado no encontrado.';
+        }      } else {
         this.error = 'Empleado no encontrado.';
       }
     },

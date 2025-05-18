@@ -4,7 +4,8 @@
   </button>
 
   <div *ngIf="menuVisible" class="settings-menu" (click)="$event.stopPropagation()">
-    <button (click)="cerrarSesion()">Cerrar sesión</button>
+    <button (click)="actualizarCuenta()">Actualizar cuenta</button>
     <button (click)="eliminarCuenta()" class="danger">Eliminar cuenta</button>
+    <button (click)="cerrarSesion()">Cerrar sesión</button>
   </div>
 </div>
