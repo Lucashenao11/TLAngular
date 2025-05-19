@@ -1,12 +1,70 @@
-<div class="empleado-container">
-  <header class="empleado-header">
-  <h2>Panel del Empleado</h2>
-  <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
-</header>  <p class="description">Registra tus gastos de viaje fácilmente:</p>
+<div class="employee-container">
+  <!-- Header -->
+  <div class="header">
+    <h1 class="title">Registro de Gastos</h1>
+    <button class="btn btn-secondary logout-btn" (click)="logout()">Cerrar Sesión</button>
+  </div>
 
-  <div class="button-group">
-    <button (click)="onAddGasto('alimentacion')">🍽️ Alimentación</button>
-    <button (click)="onAddGasto('transporte')">🚌 Transporte</button>
-    <button (click)="onAddGasto('estadia')">🏨 Estadía</button>
+  <div class="card form-card">
+    <div class="card-body">
+      <h2 class="card-title">Nuevo Gasto</h2>
+      <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="amount">Monto</label>
+          <div class="input-group">
+            <span class="input-group-text">$</span>
+            <input id="amount" type="number" formControlName="amount" class="form-control" placeholder="Ej. 45.99" />
+          </div>
+          <div *ngIf="expenseForm.get('amount')?.invalid && expenseForm.get('amount')?.touched" class="error-message">
+            El monto es obligatorio y debe ser mayor o igual a 0.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <input id="description" type="text" formControlName="description" class="form-control" placeholder="Ej. Taxi al aeropuerto" />
+          <div *ngIf="expenseForm.get('description')?.invalid && expenseForm.get('description')?.touched" class="error-message">
+            La descripción es obligatoria y no debe exceder 255 caracteres.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="type">Tipo</label>
+          <select id="type" formControlName="type" class="form-control">
+            <option value="transporte">Transporte</option>
+            <option value="alimento">Alimentación</option>
+            <option value="hotel">Hotel</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary submit-btn" [disabled]="expenseForm.invalid">Registrar Gasto</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card table-card">
+    <div class="card-body">
+      <h2 class="card-title">Historial de Gastos</h2>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Monto</th>
+              <th>Descripción</th>
+              <th>Tipo</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let expense of expenses" class="table-row">
+              <td>{{ expense.amount | currency:'USD' }}</td>
+              <td>{{ expense.description }}</td>
+              <td>{{ expense.type | titlecase }}</td>
+              <td>{{ expense.createdAt | date:'medium' }}</td>
+            </tr>
+            <tr *ngIf="expenses.length === 0">
+              <td colspan="4" class="text-center">No hay gastos registrados.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

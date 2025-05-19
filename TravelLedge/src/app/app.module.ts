@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
-import { EmpleadoComponent } from './empleado/empleado.component';
+import { EmployeeComponent } from './empleado/empleado.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
@@ -26,7 +26,7 @@ import { SettingsComponent } from './admin/settings/settings.component';
     HomeComponent,
     LoginComponent,
     AdminComponent,
-    EmpleadoComponent,
+    EmployeeComponent,
     RegistroComponent,
     AddEmployeeComponent,
     ViewEmployeeComponent,
