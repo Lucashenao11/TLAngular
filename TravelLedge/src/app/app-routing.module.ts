@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
-import { EmpleadoComponent } from './empleado/empleado.component';
+import { EmployeeComponent } from './empleado/empleado.component';
 import { RegistroComponent } from './registro/registro.component';
 import { AddEmployeeComponent } from './admin/add-employee/add-employee.component';
 import { ViewEmployeeComponent } from './admin/view-employee/view-employee.component';
@@ -32,7 +32,7 @@ const routes: Routes = [
       { path: 'settings', component: SettingsComponent }
     ] },
   { path: 'empleado',
-    component: EmpleadoComponent,
+    component: EmployeeComponent,
     canActivate: [AuthGuard],
     data: { expectedRole: 'empleado' } },
   { path: 'registro', component: RegistroComponent },

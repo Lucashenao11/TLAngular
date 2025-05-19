@@ -1,42 +1,44 @@
 const express = require('express');
-const app = express();
-const mysql = require('mysql2');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const { sequelize } = require('./models');
 
-// Cargar las variables de entorno
+const app = express();
+
+// Cargar variables de entorno
 dotenv.config();
 
-// Importar rutas
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Rutas
 const authRoutes = require('./routes/authRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const logRoutes = require('./routes/logRoutes');
+const expensesRoutes = require('./routes/expenseRoutes');
 
-app.use(cors()); // Permite que el frontend se conecte al backend
-app.use(express.json());
-
-// Rutas de autenticación
 app.use('/auth', authRoutes);
 app.use('/api/users', usuarioRoutes);
 app.use('/api', logRoutes);
+app.use('/api', expensesRoutes);
+
+app.use((err, req, res, next) => {
+  console.error('Server Error:', err.stack);
+  res.status(500).json({ message: 'Error interno del servidor.', error: err.message });
+});
 
 // Conectar a la base de datos
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-});
-
-db.connect(err => {
-  if (err) {
+sequelize.authenticate()
+  .then(() => {
+    console.log('Conectado a MySQL con Sequelize');
+  })
+  .catch(err => {
     console.error('Error conectando a la base de datos:', err);
-  } else {
-    console.log('Conectado a MySQL');
-  }
-});
+  });
 
-// Puerto de escucha
-app.listen(3000, () => {
-  console.log('Servidor corriendo en el puerto 3000');
+// Puerto
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
 });

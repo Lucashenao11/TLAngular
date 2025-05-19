@@ -15,7 +15,7 @@ export class AuthService {
   login(nombreUsuario: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl1}/login`, { nombreUsuario, password }).pipe(
       tap((response: any) => {
-        console.log('Login response:', response);
+        console.log('Respuesta del login:', response);
         if (response.token) {
           const decodedToken = this.decodeToken(response.token);
           const user = {
@@ -25,13 +25,13 @@ export class AuthService {
           };
           localStorage.setItem('token', response.token);
           localStorage.setItem('user', JSON.stringify(user));
-          console.log('Stored user in localStorage:', user);
+          console.log('Almacenado en localStorage:', user);
         } else {
-          console.warn('Unexpected login response format:', response);
+          console.warn('Respuesta inesperada del login:', response);
         }
       }),
       catchError((error) => {
-        console.error('Login error:', error);
+        console.error('Error de login:', error);
         const errorMessage = error.error?.error || 'Error al iniciar sesión. Verifica tus credenciales.';
         return throwError(() => new Error(errorMessage));
       })
@@ -43,7 +43,7 @@ export class AuthService {
       const payload = token.split('.')[1];
       return JSON.parse(atob(payload));
     } catch (error) {
-      console.error('Error decoding token:', error);
+      console.error('Error decodificando el token:', error);
       return {};
     }
   }
@@ -75,13 +75,13 @@ export class AuthService {
     const headers = { 'Authorization': `Bearer ${token}` };
     const body: { nombreUsuario: string; password?: string } = { nombreUsuario };
     if (password) body.password = password;
-    console.log('Update user request:', { id, body, token }); // Debug log
+    console.log('Petición de actualizar usuario:', { id, body, token }); 
     return this.http.post(`${this.apiUrl2}/users/updateUser/${id}`, body, { headers }).pipe(
       tap((response: any) => {
-        console.log('Update user response:', response);
+        console.log('Respuesta de actualizar usuario:', response);
       }),
       catchError((error) => {
-        console.error('Update user error:', error);
+        console.error('Error al actualizar usuario:', error);
         const errorMessage = error.error?.message || 'Error al actualizar usuario.';
         return throwError(() => new Error(errorMessage));
       })
@@ -92,4 +92,25 @@ export class AuthService {
     const headers = { 'Authorization': `Bearer ${token}` };
     return this.http.get(`${this.apiUrl2}/users/me`, { headers });
   }
-}
+
+  createExpense(amount: number, description: string, type: string, token: string): Observable<any> {
+    console.log('Create expense request:', { amount, description, type });
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    return this.http.post(`${this.apiUrl2}/expenses`, { amount, description, type }, { headers }).pipe(
+      catchError(error => {
+        console.error('Error al crear petición de gasto:', error);
+        return throwError(() => new Error(error.error?.message || 'Error al registrar gasto.'));
+      })
+    );
+  }
+
+  getExpenses(token: string): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    return this.http.get(`${this.apiUrl2}expenses`, { headers }).pipe(
+      catchError(error => {
+        console.error('Error al obtener gastos:', error);
+        return throwError(() => new Error(error.error?.message || 'Error al cargar gastos.'));
+      })
+    );
+  }
+  }
