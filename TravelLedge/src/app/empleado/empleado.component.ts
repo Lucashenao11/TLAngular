@@ -45,20 +45,25 @@ export class EmployeeComponent implements OnInit {
     }
 
     this.authService.getExpenses(token).subscribe({
-      next: (response) => {
-        this.expenses = response;
+      next: (data) => {
+        console.log('Expenses loaded:', data);
+        this.expenses = data;
       },
       error: (error) => {
-        console.error('Error al cargar gastos:', error);
+        console.error('Error al cargar gastos:', JSON.stringify(error, null, 2));
+        const errorMessage = error.status === 401
+          ? 'Sesión expirada, por favor inicia sesión de nuevo.'
+          : error.error?.message || 'No se pudieron cargar los gastos.';
         Swal.fire({
           title: 'Error',
-          text: error.error?.message || 'No se pudieron cargar los gastos.',
+          text: errorMessage,
           icon: 'error',
-          customClass: {
-            confirmButton: 'swal2-confirm btn btn-danger'
-          },
+          customClass: { confirmButton: 'swal2-confirm btn btn-danger' },
           buttonsStyling: false
         });
+        if (error.status === 401) {
+          this.logout();
+        }
       }
     });
   }
