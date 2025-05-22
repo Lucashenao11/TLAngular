@@ -76,16 +76,7 @@ export class AuthService {
     const body: { nombreUsuario: string; password?: string } = { nombreUsuario };
     if (password) body.password = password;
     console.log('Petición de actualizar usuario:', { id, body, token }); 
-    return this.http.post(`${this.apiUrl2}/users/updateUser/${id}`, body, { headers }).pipe(
-      tap((response: any) => {
-        console.log('Respuesta de actualizar usuario:', response);
-      }),
-      catchError((error) => {
-        console.error('Error al actualizar usuario:', error);
-        const errorMessage = error.error?.message || 'Error al actualizar usuario.';
-        return throwError(() => new Error(errorMessage));
-      })
-    );
+    return this.http.post(`${this.apiUrl2}/users/updateUser/${id}`, body, { headers })
   }
 
   getCurrentUser(token: string): Observable<any> {
@@ -96,21 +87,11 @@ export class AuthService {
   createExpense(amount: number, description: string, type: string, token: string): Observable<any> {
     console.log('Create expense request:', { amount, description, type });
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.post(`${this.apiUrl2}/expenses`, { amount, description, type }, { headers }).pipe(
-      catchError(error => {
-        console.error('Error al crear petición de gasto:', error);
-        return throwError(() => new Error(error.error?.message || 'Error al registrar gasto.'));
-      })
-    );
+    return this.http.post(`${this.apiUrl2}/expenses`, { amount, description, type }, { headers })
   }
 
   getExpenses(token: string): Observable<any> {
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.get(`${this.apiUrl2}expenses`, { headers }).pipe(
-      catchError(error => {
-        console.error('Error al obtener gastos:', error);
-        return throwError(() => new Error(error.error?.message || 'Error al cargar gastos.'));
-      })
-    );
-  }
+    return this.http.get(`${this.apiUrl2}/expenses`, { headers });
+    }
   }
